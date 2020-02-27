@@ -85,7 +85,9 @@ class Car {
   }
   drive(distance){
     this.odometer += distance;
+    let drivableMiles = this.tank * this.milesPerGallon;
     this.tank -= (distance / this.milesPerGallon);
+    console.log(this.tank);
     let maxTrip = (distance * this.milesPerGallon);
     if (this.tank < maxTrip){
       return `I ran out of fuel at ${this.odometer} miles!`;
@@ -101,7 +103,7 @@ const mazda = new Car({
 console.log(mazda.drive(100));
 
 /*
-  TASK 3
+  TASK 3 [PASSED]
     - Write a Lambdasian class.
     - Its constructor takes a single argument - an object with the following keys:
         + name
@@ -124,7 +126,7 @@ class Lambdasian {
 }
 
 /*
-  TASK 4
+  TASK 4 [PASSED]
     - Write an Instructor class extending Lambdasian.
     - Its constructor takes a single argument - an object with the following keys:
         + All the keys used to initialize instances of Lambdasian.
@@ -153,7 +155,7 @@ class Instructor extends Lambdasian{
 }
 
 /*
-  TASK 5
+  TASK 5 [PASSED]
     - Write a Student class extending Lambdasian.
     - Its constructor takes a single argument -  an object with the following keys:
         + All the keys used to initialize instances of Lambdasian.
@@ -187,7 +189,7 @@ class Student extends Lambdasian{
 }
 
 /*
-  TASK 6
+  TASK 6 [PASSED]
     - Write a ProjectManager class extending Instructor.
     - Its constructor takes a single argument - an object with the following keys:
         + All the keys used to initialize instances of Instructor.
@@ -199,8 +201,18 @@ class Student extends Lambdasian{
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
-
+class ProjectManager extends Instructor{
+  constructor(attrs){
+    super(attrs),
+    this.gradClassName = attrs.gradClassName,
+    this.favInstructor = attrs.favInstructor
+  }
+  standUp(channel){
+    return `${this.name} announces to ${channel}, @channel standy times!`
+  }
+  debugsCode(StudentObject, subject){
+    return `${this.name} debugs ${StudentObject.name}'s code on ${subject}`
+  }
 }
 
 /*
