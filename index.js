@@ -84,23 +84,18 @@ class Car {
     return this.tank += gallons;
   }
   drive(distance){
-    this.odometer += distance;
-    let drivableMiles = this.tank * this.milesPerGallon;
-    this.tank -= (distance / this.milesPerGallon);
-    console.log(this.tank);
-    let maxTrip = (distance * this.milesPerGallon);
-    if (this.tank < maxTrip){
-      return `I ran out of fuel at ${this.odometer} miles!`;
+    let maxTrip = (this.tank * this.milesPerGallon);
+    if (distance <= maxTrip){
+      this.odometer += distance;
+      this.tank -= (distance / this.milesPerGallon);
+    }else{
+      this.odometer += maxTrip;
+      this.tank = 0;
+      return `I ran out of fuel at ${this.odometer} miles!`
     }
   }
 }
 
-const mazda = new Car({
-  model : 'mazda5',
-  milesPerGallon : 20,
-})
-
-console.log(mazda.drive(100));
 
 /*
   TASK 3 [PASSED]
