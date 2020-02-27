@@ -28,7 +28,7 @@ class Airplane {
 */
 
 /*
-  TASK 1
+  TASK 1 [passed]
     - Write a Person class whose constructor initializes `name` and `age` from arguments.
     - All instances of Person should also initialize with an empty `stomach` array.
     - Give instances of Person the ability to `.eat("someFood")`:
@@ -74,8 +74,31 @@ class Person {
 */
 
 class Car {
-
+  constructor(model, milesPerGallon){
+    this.model = model,
+    this.milesPerGallon = milesPerGallon,
+    this.tank = 0,
+    this.odometer = 0
+  }
+  fill(gallons){
+    return this.tank += gallons;
+  }
+  drive(distance){
+    this.odometer += distance;
+    this.tank -= (distance / this.milesPerGallon);
+    let maxTrip = (distance * this.milesPerGallon);
+    if (this.tank < maxTrip){
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    }
+  }
 }
+
+const mazda = new Car({
+  model : 'mazda5',
+  milesPerGallon : 20,
+})
+
+console.log(mazda.drive(100));
 
 /*
   TASK 3
@@ -90,7 +113,14 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-
+  constructor(attrs){
+    this.name = attrs.name,
+    this.age = attrs.age,
+    this.location = attrs.location
+  }
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}`
+  }
 }
 
 /*
